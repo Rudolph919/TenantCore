@@ -27,4 +27,12 @@ class Tenant extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    /**
+     * Get the items for the tenant.
+     */
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class);
+    }
 }
