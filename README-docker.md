@@ -21,5 +21,4 @@ podman compose exec tenantcore_app php artisan migrate --force
 
 ## URLs
 
-- **Without proxy**: http://localhost:8084 (API)
-- **With proxy**: https://tenantcore.docker
+http://localhost:8084 (API)
