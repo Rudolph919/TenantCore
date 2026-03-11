@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\ItemController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Models\Tenant;
@@ -22,5 +23,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/register', [RegisterController::class, 'store']);
         Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth:sanctum');
         Route::get('/me', fn () => response()->json(request()->user()->only(['id', 'name', 'email'])))->middleware('auth:sanctum');
+
+        Route::apiResource('items', ItemController::class)->middleware('auth:sanctum');
     });
 });
