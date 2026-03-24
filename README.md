@@ -99,9 +99,11 @@ All tenant-scoped routes require the `X-Tenant-ID` header (tenant slug or id).
 composer install
 cp .env.example .env
 php artisan key:generate
-php artisan migrate
+php artisan migrate --seed
 php artisan serve
 ```
+
+`--seed` creates a demo tenant with slug **`acme`** so `X-Tenant-ID: acme` works in the examples below.
 
 ### Docker / Podman
 
@@ -109,18 +111,21 @@ See [README-docker.md](README-docker.md).
 
 ### Example Request
 
+Use the **same base URL** for every call: `http://localhost:8084` with Docker/Podman, or `http://localhost:8000` if you use `php artisan serve` only.
+
+Sanctum expects **`Authorization: Bearer <token>`** (include the word `Bearer` and a space before the token).
+
 ```bash
-# Create tenant (via seeder or DB)
-# Register user
-curl -X POST http://localhost:8000/api/v1/register \
+# Register user (after migrate --seed so tenant "acme" exists)
+curl -X POST http://localhost:8084/api/v1/register \
   -H "X-Tenant-ID: acme" \
   -H "Content-Type: application/json" \
   -d '{"name":"Jane","email":"jane@acme.com","password":"password","password_confirmation":"password"}'
 
-# Create item (use token from response)
-curl -X POST http://localhost:8000/api/v1/items \
+# Create item — paste the token from the register response after "Bearer "
+curl -X POST http://localhost:8084/api/v1/items \
   -H "X-Tenant-ID: acme" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Authorization: Bearer YOUR_TOKEN_HERE" \
   -H "Content-Type: application/json" \
   -d '{"name":"My Item","description":"Optional description"}'
 ```

@@ -16,9 +16,17 @@ cp .env.example .env
 
 podman compose up -d --build
 podman compose exec tenantcore_app php artisan key:generate
-podman compose exec tenantcore_app php artisan migrate --force
+podman compose exec tenantcore_app php artisan migrate --force --seed
+```
+
+Creates a demo tenant with slug **`acme`** so the README `curl` examples work.
+
+If you already ran migrate without seeding:
+
+```bash
+podman compose exec tenantcore_app php artisan db:seed
 ```
 
 ## URLs
 
-http://localhost:8084 (API)
+- **http://localhost:8084** — web / API (through nginx)
