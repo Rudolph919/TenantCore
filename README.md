@@ -1,5 +1,7 @@
 # TenantCore
 
+[![Tests](https://github.com/Rudolph919/TenantCore/actions/workflows/tests.yml/badge.svg)](https://github.com/Rudolph919/TenantCore/actions/workflows/tests.yml)
+
 **API-First Multi-Tenant Backend** — A clean, maintainable Laravel API demonstrating tenant isolation, stable contracts, and SaaS architecture fundamentals.
 
 ---

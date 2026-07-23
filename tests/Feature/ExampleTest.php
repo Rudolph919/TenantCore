@@ -1,7 +1,7 @@
 <?php
 
-test('the application redirects root to api v1', function () {
+test('the application serves the landing page at root', function () {
     $response = $this->get('/');
 
-    $response->assertRedirect('/api/v1');
+    $response->assertOk();
 });
